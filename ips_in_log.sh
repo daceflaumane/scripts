@@ -33,10 +33,10 @@ sort -nr -k2 results.txt > sorted_results.txt
 
 # Saskaita cik unikalo IP
 unique_ips=$(awk '{print $1}' sorted_results.txt | sort -u | wc -l)
-echo "Number of unique IPs: $unique_ips"
+echo "Unikalas adreses log failos: $unique_ips"
 
 # Parada Top 10 rezultatus
-echo "Top 10 results:"
+echo "Top 10 rezultati:"
 head -10 sorted_results.txt
 
 # Parbauda vai 10.rezultats ir vienads ar 11.
