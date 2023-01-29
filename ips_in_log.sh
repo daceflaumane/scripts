@@ -1,34 +1,32 @@
 #!/bin/sh
 
 
+# Parbauda vai ir io_files direktorija, ja nav, tad izveido
+if [ ! -d "io_files" ]; then
+  mkdir io_files
+fi
+
 # Izveido vai iztira results.txt failu (darbojas atrak neka glabat un saskirot atmina)
 echo "" > io_files/results.txt
 
 # Ludz lietotajam ievadit log failu direktoriju
 read -p "Ievadiet log failu direktoriju: " folder_path
 
-# Loop cauri visiem .log failiem direktorija
-for file in $folder_path/*.log
-do
-    # Meklet IP adresi faila
-    grep -oE "\b^([0-9]{1,3}\.){3}[0-9]{1,3}\s" $file | while read ip
-    do
-        # Parbauda vai IP adrese jau ir results faila (control case 42.156.138.3 29 vs 30)
-        ip=$ip-
-        if grep -q "^$ip" io_files/results.txt; then
-            # Ja ir, skaitam pieskaita 1
-            sed -i "s/^$ip.*/$ip $(($(grep "^$ip" io_files/results.txt | awk '{print $2}') + 1))/g" io_files/results.txt
-        else
-            # Ja nav, tad pievienot ar indeksu 1
-            echo "$ip 1" >> io_files/results.txt
-        fi
-    done
-done
 
-# Iztira vai izveido sorted_results failu.
-echo "" > io_files/sorted_results.txt
-# Saskiro pec biezuma (.txt fails ir atrak neka darit to atmina)
-sort -nr -k2 io_files/results.txt > io_files/sorted_results.txt
+# Apkopo IP adreses rindu sakuma
+cat log_files/*.log | grep -o "^[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" > io_files/results.txt
+
+# Apkopo IO adreses citviet log failos
+cat log_files/*.log | grep -o "//[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+" | grep -o "[0-9]\+\.[0-9]\+\.[0-9]\+\.[0-9]\+"  >> io_files/results.txt
+
+# Izvac dublikatus un saskaita cik reizes IP paradijas failos
+cat io_files/results.txt | sort | uniq -c | sort -n > io_files/sorted_results.txt
+
+# Rezultati otrada kartiba
+tac io_files/sorted_results.txt > io_files/results.txt
+
+# Sakarto parskatami
+cat io_files/results.txt | awk '{print $2 "- " $1}' > io_files/sorted_results.txt
 
 
 # Saskaita cik unikalo IP
@@ -51,3 +49,5 @@ fi
 
 
 echo "Pilns rezultats pieejams: io_files/sorted_results.txt"
+echo ""
+echo ""

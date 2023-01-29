@@ -2,9 +2,9 @@
 
 # skripts, kas parbauda vai ip adrese ir LV
 
-### Atkomentet aizkomentetas rindas pirmajam execution
-# # Lejupladet LV IPV4 adresu sarakstu
-# curl -o io_files/full_lv_ips.txt https://www.nic.lv/local.net
+# Lejupladet LV IPV4 adresu sarakstu
+echo "" > io_files/full_lv_ips.txt
+curl -o io_files/full_lv_ips.txt https://www.nic.lv/local.net
 
 ### Saskirot rezultatus no NIC un esosa IP adr.saraksta
 # Unikalo IP input fails / I
@@ -37,6 +37,9 @@ echo "" > io_files/matched_ips.txt
 grepcidr io_files/sorted_ips_from_results.txt -f io_files/acct_ip_reg.txt >> io_files/matched_ips.txt
 
 echo "Rezultats saglabats: $matched_ips_file"
+echo ""
 echo "LV IP adreses no log failiem:"
 cat $matched_ips_file
+echo ""
+echo ""
 
