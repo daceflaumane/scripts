@@ -60,3 +60,41 @@ notify_ip_holders.sh ir nepieciesami:
 91.228.7.63
 ```
 
+## screenme.py
+screenme.py izmantosanai ir nepieciesami:
+
+*python3
+```
+sudo apt-get update
+sudo apt-get install python3.9
+```
+
+*pip
+```
+python -m ensurepip --upgrade
+```
+
+*selenium
+```
+pip3 install selenium
+```
+
+*geckodriver
+```
+pips install webdrivermanager
+webdrivermanager firefox chrome --linkpath /usr/local/bin
+```
+
+*pyautogui
+```
+python3 -m pip install pyautogui
+sudo apt-get install scrot
+sudo apt-get install python3-tk
+sudo apt-get install python3-dev
+```
+
+## Izpildit screenme.py
+Ka pirmais komandrinadas arguments janorada URL, no kura uznemt ekransavinu
+```
+python3 screenme.py https://example.com
+```
