@@ -55,5 +55,5 @@ while read ip; do
 done < io_files/matched_ips.txt
 
 echo "Rezultats saglabats: io_files/notify_list.txt"
-echo "LV IP adreses sagrupētas pec ISP ar abuse e-pasta kontaktiem:"
+echo "LV IP adreses sagrupetas pec ISP ar abuse e-pasta kontaktiem:"
 cat io_files/notify_list.txt
