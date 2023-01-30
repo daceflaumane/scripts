@@ -3,7 +3,8 @@
 lv_ips_in_logs.sh un notify_ip_holders.sh ir nepieciesama grepcidr komanda
 http://www.pc-tools.net/unix/grepcidr/
 
-*Instalet grepcidr*:
+*Instalet grepcidr*
+*piemeri ar apt-get/linux
 ```
 sudo apt-get install grepcidr
 sudo apt update && sudo apt upgrade grepcidr
